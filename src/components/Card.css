@@ -1,0 +1,33 @@
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.card-elevated {
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-gradient-income {
+  background: var(--gradient-income);
+  color: var(--text-inverse);
+}
+
+.card-gradient-expense {
+  background: var(--gradient-expense);
+  color: var(--text-inverse);
+}
+
+.card-gradient-savings {
+  background: var(--gradient-savings);
+  color: var(--text-primary);
+}
+
+.card-gradient-espresso {
+  background: var(--gradient-espresso);
+  color: var(--text-inverse);
+}
+

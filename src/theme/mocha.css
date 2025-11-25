@@ -1,0 +1,169 @@
+/**
+ * MochaMoney Design System - Coffee Theme
+ * Based on logo colors: #3F2A22 (espresso), #8B5E3C (coffee bean), #E8D7B9 (milk foam)
+ */
+
+:root {
+  /* Base Coffee Palette */
+  --espresso: #3F2A22;
+  --espresso-dark: #2A1B15;
+  --espresso-light: #5A3F32;
+  
+  --coffee-bean: #8B5E3C;
+  --coffee-bean-dark: #6B4629;
+  --coffee-bean-light: #A67C52;
+  
+  --milk-foam: #E8D7B9;
+  --milk-foam-dark: #D4C19F;
+  --milk-foam-light: #F5EDE0;
+  
+  --caramel: #C9A961;
+  --caramel-dark: #A8894A;
+  --caramel-light: #E0C178;
+  
+  --cream: #F5F0E8;
+  --cream-dark: #E8E0D5;
+  
+  --latte: #D4B896;
+  --mocha: #A67C52;
+  --cappuccino: #E8D7B9;
+  
+  /* Semantic Colors */
+  --bg-primary: var(--cream);
+  --bg-secondary: var(--milk-foam);
+  --bg-surface: var(--milk-foam);
+  --bg-elevated: #FFFFFF;
+  
+  --text-primary: var(--espresso);
+  --text-secondary: var(--coffee-bean);
+  --text-tertiary: var(--coffee-bean-light);
+  --text-inverse: var(--milk-foam-light);
+  
+  --accent-primary: var(--caramel);
+  --accent-secondary: var(--coffee-bean);
+  --accent-hover: var(--caramel-light);
+  
+  /* Status Colors */
+  --success: #6B8E23;
+  --success-light: #9ACD32;
+  --error: #CD5C5C;
+  --error-light: #F08080;
+  --warning: var(--caramel);
+  --info: #5A7FA8;
+  
+  /* Income/Expense Gradients */
+  --gradient-income: linear-gradient(135deg, #6B8E23 0%, #9ACD32 100%);
+  --gradient-expense: linear-gradient(135deg, #CD5C5C 0%, #F08080 100%);
+  --gradient-savings: linear-gradient(135deg, var(--caramel) 0%, var(--caramel-light) 100%);
+  --gradient-espresso: linear-gradient(135deg, var(--espresso) 0%, var(--coffee-bean) 100%);
+  --gradient-mocha: linear-gradient(135deg, var(--mocha) 0%, var(--latte) 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(63, 42, 34, 0.1);
+  --shadow-md: 0 4px 12px rgba(63, 42, 34, 0.15);
+  --shadow-lg: 0 8px 24px rgba(63, 42, 34, 0.2);
+  --shadow-glow: 0 0 20px rgba(201, 169, 97, 0.4);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-numbers: 'Outfit', sans-serif;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* Z-index layers */
+  --z-base: 1;
+  --z-elevated: 10;
+  --z-dropdown: 100;
+  --z-modal: 1000;
+  --z-toast: 2000;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Utilities */
+.headline {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.number {
+  font-family: var(--font-numbers);
+  font-weight: 600;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--coffee-bean);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--coffee-bean-dark);
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--caramel);
+  color: var(--text-inverse);
+}
+

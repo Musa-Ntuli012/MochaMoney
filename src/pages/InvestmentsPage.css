@@ -1,0 +1,141 @@
+.investments-page {
+  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.investments-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.investment-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-md);
+}
+
+.summary-label {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.summary-value {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+
+.summary-value.positive {
+  color: var(--success);
+}
+
+.summary-value.negative {
+  color: var(--error);
+}
+
+.investments-card {
+  padding: var(--space-xl);
+}
+
+.investments-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-lg);
+}
+
+.investment-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+
+.investment-error {
+  grid-column: 1 / -1;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background: rgba(205, 92, 92, 0.1);
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+.investments-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.investment-item {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr auto;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.investment-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.investment-name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.investment-meta {
+  display: flex;
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.investment-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: var(--space-md);
+}
+
+.value-label {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.value {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.value.positive {
+  color: var(--success);
+}
+
+.value.negative {
+  color: var(--error);
+}
+
+.investment-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .investment-item {
+    grid-template-columns: 1fr;
+  }
+
+  .investment-values {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .investment-actions {
+    justify-content: flex-start;
+  }
+}
+
