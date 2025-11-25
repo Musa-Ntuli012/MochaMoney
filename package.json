@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "MochaMoney - Coffee-themed Budget Tracker",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "server": "tsx watch server/index.ts",
