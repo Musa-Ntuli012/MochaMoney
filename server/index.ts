@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import app, { runDueRecurringRules, RECURRING_INTERVAL_MS } from '../api/app';
+import app, { runDueRecurringRules, RECURRING_INTERVAL_MS } from '../api/[...]';
 
 const PORT = Number(process.env.PORT) || 4000;
 
