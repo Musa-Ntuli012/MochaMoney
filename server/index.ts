@@ -87,9 +87,9 @@ const RECURRING_INTERVAL_MS = Number(process.env.RECURRING_INTERVAL_MS) || 60_00
 const client = new MongoClient(MONGODB_URI);
 
 async function connectClient() {
-  if (!client.topology?.isConnected()) {
-    await client.connect();
-  }
+  // MongoDB driver handles connection pooling automatically
+  // connect() is safe to call multiple times
+  await client.connect();
 }
 
 const app = express();

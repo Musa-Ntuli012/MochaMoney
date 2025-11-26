@@ -23,3 +23,4 @@ export async function downloadTransactionsCSV(token: string) {
   window.URL.revokeObjectURL(url);
 }
 
+
