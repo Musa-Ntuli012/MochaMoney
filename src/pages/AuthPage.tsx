@@ -45,7 +45,7 @@ export const AuthPage: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="auth-header">
-          <img src="https://drive.google.com/uc?export=view&id=19GAT6JY-Uc0Thf4nIPiP79bnRGxScEp5" alt="MochaMoney" className="auth-logo" />
+          <img src="/Logo.png" alt="MochaMoney" className="auth-logo" />
           <h1 className="auth-title">MochaMoney</h1>
           <p className="auth-subtitle">Brew Your Financial Future</p>
         </div>

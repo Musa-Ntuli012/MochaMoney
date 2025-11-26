@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico'],
+      includeAssets: ['Logo.png', 'favicon.ico'],
       manifest: {
         name: 'MochaMoney - Brew Your Financial Future',
         short_name: 'MochaMoney',
@@ -19,12 +19,12 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'https://drive.google.com/uc?export=view&id=19GAT6JY-Uc0Thf4nIPiP79bnRGxScEp5',
+            src: 'Logo.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'https://drive.google.com/uc?export=view&id=19GAT6JY-Uc0Thf4nIPiP79bnRGxScEp5',
+            src: 'Logo.png',
             sizes: '512x512',
             type: 'image/png',
           },

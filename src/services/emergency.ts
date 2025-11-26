@@ -1,6 +1,9 @@
 import type { EmergencyFund } from '../types';
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000').replace(/\/$/, '');
+// On Vercel, API is on same domain, so use relative URLs if VITE_API_URL is not set
+const API_BASE_URL = import.meta.env.VITE_API_URL 
+  ? import.meta.env.VITE_API_URL.replace(/\/$/, '')
+  : (import.meta.env.PROD ? '' : 'http://localhost:4000');
 
 const buildHeaders = (token: string) => ({
   'Content-Type': 'application/json',

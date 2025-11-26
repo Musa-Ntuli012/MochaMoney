@@ -27,7 +27,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="layout-header">
         <div className="layout-header-content">
           <div className="layout-logo">
-            <img src="https://drive.google.com/uc?export=view&id=19GAT6JY-Uc0Thf4nIPiP79bnRGxScEp5" alt="MochaMoney" className="logo-img" />
+            <img src="/Logo.png" alt="MochaMoney" className="logo-img" />
             <h1 className="logo-text">MochaMoney</h1>
           </div>
           <nav className="layout-nav">

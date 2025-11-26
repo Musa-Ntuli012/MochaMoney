@@ -15,7 +15,15 @@
    
    c. Keep the connection string handy (`mongodb+srv://...`)
    
-3. **Set Environment Variables**
+3. **Download App Logo**
+   
+   The app logo needs to be downloaded and placed in the `public/` folder:
+   - Open: https://drive.google.com/file/d/19GAT6JY-Uc0Thf4nIPiP79bnRGxScEp5/view?usp=sharing
+   - Download the image file
+   - Save it as `Logo.png` in the `public/` folder (case-sensitive)
+   - **Note**: If the Google Drive link doesn't work, you can use any logo image and name it `Logo.png`
+
+4. **Set Environment Variables**
    
    Copy the provided example file and fill in the values:
    ```bash
@@ -23,9 +31,9 @@
    ```
    - `MONGODB_URI` — paste the Atlas connection string
    - `JWT_SECRET` — any long random string for signing tokens
-   - `VITE_API_URL` — defaults to `http://localhost:4000`
+   - `VITE_API_URL` — defaults to `http://localhost:4000` (leave empty for production on Vercel)
 
-4. **Set Up Database Collections**
+5. **Set Up Database Collections**
    
    In your MongoDB Atlas cluster, create the following collections in a database named `mochamoney`:
    - `users`
@@ -38,12 +46,12 @@
    - `budgets`
    - `settings`
 
-5. **Start API Server**
+6. **Start API Server**
    ```bash
    npm run server
    ```
 
-6. **Start Vite Dev Server**
+7. **Start Vite Dev Server**
    ```bash
    npm run dev
    ```
@@ -81,7 +89,7 @@ MochaMoney/
 │   ├── utils/          # Utility functions
 │   └── theme/          # Theme CSS
 ├── public/             # Static assets
-└── Logo.png           # App logo
+│   └── Logo.png       # App logo (download from Google Drive)
 ```
 
 ## Troubleshooting
