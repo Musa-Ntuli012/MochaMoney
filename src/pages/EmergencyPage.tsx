@@ -4,6 +4,8 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { formatCurrency } from '../utils/format';
+import { useAddTransaction } from '../hooks/useTransactions';
+import { useAuthStore } from '../store/authStore';
 import {
   useEmergencyFund,
   useCreateEmergencyFund,
@@ -18,6 +20,8 @@ export const EmergencyPage: React.FC = () => {
   const updateFund = useUpdateEmergencyFund();
   const deleteFund = useDeleteEmergencyFund();
   const fund = data;
+  const addTransaction = useAddTransaction();
+  const { user } = useAuthStore.getState();
 
   const [form, setForm] = useState({
     target: '',
@@ -32,12 +36,23 @@ export const EmergencyPage: React.FC = () => {
       setAlert('Target amount is required');
       return;
     }
-    await createFund.mutateAsync({
+    const currentAmount = Number(form.current) || 0;
+    const created = await createFund.mutateAsync({
       target: Number(form.target),
-      current: Number(form.current) || 0,
+      current: currentAmount,
       currency: 'ZAR',
       lastUpdated: new Date().toISOString(),
     });
+    if (currentAmount > 0) {
+      await addTransaction.mutateAsync({
+        type: 'stash',
+        categoryId: 'emergency',
+        amount: currentAmount,
+        currency: user?.currency || 'ZAR',
+        date: new Date().toISOString(),
+        description: 'Initial emergency fund contribution',
+      });
+    }
     setForm({ target: '', current: '' });
   };
 
@@ -46,6 +61,14 @@ export const EmergencyPage: React.FC = () => {
     await updateFund.mutateAsync({
       id: fund._id,
       data: { current: fund.current + amount },
+    });
+    await addTransaction.mutateAsync({
+      type: 'stash',
+      categoryId: 'emergency',
+      amount,
+      currency: user?.currency || fund.currency || 'ZAR',
+      date: new Date().toISOString(),
+      description: 'Emergency fund top-up',
     });
   };
 

@@ -30,6 +30,10 @@ export const DashboardPage: React.FC = () => {
         } else if (t.type === 'expense') {
           acc.balance -= t.amount;
           acc.monthlyExpenses += t.amount;
+        } else if (t.type === 'stash') {
+          // Treat stash / emergency contributions as reducing available balance,
+          // but don't count them as monthly "expenses" in the UI.
+          acc.balance -= t.amount;
         }
         return acc;
       },

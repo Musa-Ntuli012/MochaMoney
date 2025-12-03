@@ -4,13 +4,7 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { formatCurrency, formatDate } from '../utils/format';
-import {
-  useRecurringRules,
-  useCreateRecurringRule,
-  useUpdateRecurringRule,
-  useDeleteRecurringRule,
-  useRunRecurringRule,
-} from '../hooks/useRecurring';
+import { useRecurringRules, useCreateRecurringRule, useUpdateRecurringRule, useDeleteRecurringRule } from '../hooks/useRecurring';
 import type { RecurringRule } from '../types';
 import './RecurringPage.css';
 
@@ -22,7 +16,6 @@ export const RecurringPage: React.FC = () => {
   const createRule = useCreateRecurringRule();
   const updateRule = useUpdateRecurringRule();
   const deleteRule = useDeleteRecurringRule();
-  const runRule = useRunRecurringRule();
   const [form, setForm] = useState({
     name: '',
     type: 'expense' as RecurringRule['type'],
@@ -154,14 +147,6 @@ export const RecurringPage: React.FC = () => {
               </div>
               <div className="recurring-actions">
                 <div className="recurring-amount">{formatCurrency(rule.amount, rule.currency)}</div>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={() => runRule.mutate(rule._id)}
-                    isLoading={runRule.isPending}
-                  >
-                    Run now
-                  </Button>
                 <Button
                   variant={rule.active ? 'secondary' : 'outline'}
                   size="sm"

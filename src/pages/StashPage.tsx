@@ -4,12 +4,9 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { formatCurrency } from '../utils/format';
-import {
-  useSavingsGoals,
-  useCreateSavingsGoal,
-  useUpdateSavingsGoal,
-  useDeleteSavingsGoal,
-} from '../hooks/useSavings';
+import { useSavingsGoals, useCreateSavingsGoal, useUpdateSavingsGoal, useDeleteSavingsGoal } from '../hooks/useSavings';
+import { useAddTransaction } from '../hooks/useTransactions';
+import { useAuthStore } from '../store/authStore';
 import './StashPage.css';
 
 export const StashPage: React.FC = () => {
@@ -18,6 +15,8 @@ export const StashPage: React.FC = () => {
   const createGoal = useCreateSavingsGoal();
   const updateGoal = useUpdateSavingsGoal();
   const deleteGoal = useDeleteSavingsGoal();
+  const addTransaction = useAddTransaction();
+  const { user } = useAuthStore.getState();
   const [form, setForm] = useState({
     name: '',
     target: '',
@@ -34,13 +33,25 @@ export const StashPage: React.FC = () => {
       return;
     }
     try {
-      await createGoal.mutateAsync({
+      const created = await createGoal.mutateAsync({
         name: form.name,
         target: Number(form.target),
         current: Number(form.current) || 0,
         currency: 'ZAR',
         color: form.color,
       });
+
+      const initialAmount = Number(form.current) || 0;
+      if (initialAmount > 0) {
+        await addTransaction.mutateAsync({
+          type: 'stash',
+          categoryId: 'savings',
+          amount: initialAmount,
+          currency: user?.currency || 'ZAR',
+          date: new Date().toISOString(),
+          description: `Initial contribution to ${created.name}`,
+        });
+      }
       setForm({ name: '', target: '', current: '', color: '#C9A961' });
     } catch (err: any) {
       setError(err.message || 'Failed to create savings goal');
@@ -144,13 +155,22 @@ export const StashPage: React.FC = () => {
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() =>
-                      updateGoal.mutate({
+                    onClick={async () => {
+                      const amount = 100;
+                      await updateGoal.mutateAsync({
                         id: goal._id,
-                        data: { current: Number(goal.current) + 100 },
-                      })
-                    }
-                    isLoading={updateGoal.isPending}
+                        data: { current: Number(goal.current) + amount },
+                      });
+                      await addTransaction.mutateAsync({
+                        type: 'stash',
+                        categoryId: 'savings',
+                        amount,
+                        currency: user?.currency || goal.currency || 'ZAR',
+                        date: new Date().toISOString(),
+                        description: `Contribution to ${goal.name}`,
+                      });
+                    }}
+                    isLoading={updateGoal.isPending || addTransaction.isPending}
                   >
                     + Add R100
                   </Button>
