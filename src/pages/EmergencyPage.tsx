@@ -37,7 +37,7 @@ export const EmergencyPage: React.FC = () => {
       return;
     }
     const currentAmount = Number(form.current) || 0;
-    const created = await createFund.mutateAsync({
+    await createFund.mutateAsync({
       target: Number(form.target),
       current: currentAmount,
       currency: 'ZAR',
