@@ -36,40 +36,48 @@ export const EmergencyPage: React.FC = () => {
       setAlert('Target amount is required');
       return;
     }
-    const currentAmount = Number(form.current) || 0;
-    await createFund.mutateAsync({
-      target: Number(form.target),
-      current: currentAmount,
-      currency: 'ZAR',
-      lastUpdated: new Date().toISOString(),
-    });
-    if (currentAmount > 0) {
-      await addTransaction.mutateAsync({
-        type: 'stash',
-        categoryId: 'emergency',
-        amount: currentAmount,
-        currency: user?.currency || 'ZAR',
-        date: new Date().toISOString(),
-        description: 'Initial emergency fund contribution',
+    try {
+      const currentAmount = Number(form.current) || 0;
+      await createFund.mutateAsync({
+        target: Number(form.target),
+        current: currentAmount,
+        currency: 'ZAR',
+        lastUpdated: new Date().toISOString(),
       });
+      if (currentAmount > 0) {
+        await addTransaction.mutateAsync({
+          type: 'stash',
+          categoryId: 'emergency',
+          amount: currentAmount,
+          currency: user?.currency || 'ZAR',
+          date: new Date().toISOString(),
+          description: 'Initial emergency fund contribution',
+        });
+      }
+      setForm({ target: '', current: '' });
+    } catch (err: any) {
+      setAlert(err.message || 'Failed to create emergency fund');
     }
-    setForm({ target: '', current: '' });
   };
 
   const handleTopUp = async (amount: number) => {
     if (!fund) return;
-    await updateFund.mutateAsync({
-      id: fund._id,
-      data: { current: fund.current + amount },
-    });
-    await addTransaction.mutateAsync({
-      type: 'stash',
-      categoryId: 'emergency',
-      amount,
-      currency: user?.currency || fund.currency || 'ZAR',
-      date: new Date().toISOString(),
-      description: 'Emergency fund top-up',
-    });
+    try {
+      await updateFund.mutateAsync({
+        id: fund._id,
+        data: { current: fund.current + amount },
+      });
+      await addTransaction.mutateAsync({
+        type: 'stash',
+        categoryId: 'emergency',
+        amount,
+        currency: user?.currency || fund.currency || 'ZAR',
+        date: new Date().toISOString(),
+        description: 'Emergency fund top-up',
+      });
+    } catch (err: any) {
+      setAlert(err.message || 'Failed to add to emergency fund');
+    }
   };
 
   const handleReset = async () => {

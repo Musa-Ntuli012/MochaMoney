@@ -156,19 +156,23 @@ export const StashPage: React.FC = () => {
                     variant="secondary"
                     size="sm"
                     onClick={async () => {
-                      const amount = 100;
-                      await updateGoal.mutateAsync({
-                        id: goal._id,
-                        data: { current: Number(goal.current) + amount },
-                      });
-                      await addTransaction.mutateAsync({
-                        type: 'stash',
-                        categoryId: 'savings',
-                        amount,
-                        currency: user?.currency || goal.currency || 'ZAR',
-                        date: new Date().toISOString(),
-                        description: `Contribution to ${goal.name}`,
-                      });
+                      try {
+                        const amount = 100;
+                        await updateGoal.mutateAsync({
+                          id: goal._id,
+                          data: { current: Number(goal.current) + amount },
+                        });
+                        await addTransaction.mutateAsync({
+                          type: 'stash',
+                          categoryId: 'savings',
+                          amount,
+                          currency: user?.currency || goal.currency || 'ZAR',
+                          date: new Date().toISOString(),
+                          description: `Contribution to ${goal.name}`,
+                        });
+                      } catch (err: any) {
+                        setError(err.message || 'Failed to add contribution');
+                      }
                     }}
                     isLoading={updateGoal.isPending || addTransaction.isPending}
                   >
